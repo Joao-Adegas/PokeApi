@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (classAbilityPokemon) {
                 // join() -> cria uma string com as habiliades dos pokemons separadas por virgula.
-                classAbilityPokemon.innerHTML = `${habilidades.join(', ')}`; 
+                classAbilityPokemon.innerHTML = `${habilidades.join('<br> ')}`; 
             }
       
             if(classImagePokemon){
