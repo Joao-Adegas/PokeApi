@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const classNamePokemon = document.querySelector('.namePokemon');
     const classPsPokemon = document.querySelector('.PsPokemon');
     const classAbilityPokemon = document.querySelector('.habilidadesPokemon');
-    const classImagePokemon = document.querySelector('.imagePokemon');
+    const classImagePokemon = document.querySelector('.img');
     const searchPokemon = document.querySelector('.search_pokemon');
     const btn_send_pokemon = document.querySelector('.btn_send_Pokemon');
     const btn_add_in_deck = document.querySelector('.add_in_deck');
     const msg_add_deck = document.querySelector('.msg_add_deck');
-    const deck = []
-    const see_deck = document.querySelector('.see_deck');
+    const deck = [];
+    const deck_user = document.querySelector('.deck_user');
 
     async function obterdataApi(pokemon) {
         const pokeApi = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(pokeApi);
 
             if (!response.ok) {
-                throw new Error("Sabe nem digitar o nome de um pokemon o AMEBA!!");
+                classNamePokemon.innerHTML = `Not Found <img src="imagens/pikachu_Not_Found.png">`;
+                classAbilityPokemon.innerHTML = ""; 
+                classImagePokemon.innerHTML = ""; 
+                classPsPokemon.innerHTML = "";
             }
 
             const dataApi = await response.json();
@@ -56,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 classImagePokemon.innerHTML = `<img src="${image}" alt="Imagem_${image}" >` ;
             }
 
+            msg_add_deck.innerHTML = "";
+
         } catch (erro) {
             console.log(erro);
         }
@@ -65,21 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //Buscando dataApi do Pokémon com ID 12
 
     btn_send_pokemon.addEventListener('click',()=>{
+        
         const pokemon = searchPokemon.value;        
-    
-        obterdataApi(pokemon);
+        obterdataApi(pokemon);        
         
-        btn_add_in_deck.addEventListener("click", () => {
-            deck.push(pokemon);
-            console.log(deck);
-            msg_add_deck.innerHTML = `Adicionado ao deck`;
-        })
-        
-        see_deck.addEventListener("click", () =>{
-            deck_user.innerHTML = `${deck}`;
-        });
     });
 
 
 });
+
 
