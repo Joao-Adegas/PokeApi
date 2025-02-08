@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const classPsPokemon = document.querySelector('.PsPokemon');
     const classAbilityPokemon = document.querySelector('.habilidadesPokemon');
     const classImagePokemon = document.querySelector('.imagePokemon');
+    const searchPokemon = document.querySelector('.search_pokemon');
+    const btn_send_pokemon = document.querySelector('.btn_send_Pokemon');
+    const btn_add_in_deck = document.querySelector('.add_in_deck');
+    const msg_add_deck = document.querySelector('.msg_add_deck');
+    const deck = []
+    const see_deck = document.querySelector('.see_deck');
 
     async function obterdataApi(pokemon) {
         const pokeApi = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
@@ -22,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const habilidades = dataApi.abilities.map(habilidade => habilidade.ability.name);
             const image = dataApi.sprites.front_default;
             const psPokemon = dataApi.stats.find(stat => stat.stat.name === 'hp');;
+            
 
             console.log(nomePokemon);
             console.log(idPokemon);
@@ -39,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if(psPokemon){
                 classPsPokemon.innerHTML = `${psPokemon.base_stat}`;
             }
-    
 
             if (classAbilityPokemon) {
                 // join() -> cria uma string com as habiliades dos pokemons separadas por virgula.
@@ -57,6 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     //Buscando dataApi do Pokémon com ID 12
-    obterdataApi(12);
+
+    btn_send_pokemon.addEventListener('click',()=>{
+        const pokemon = searchPokemon.value;        
+    
+        obterdataApi(pokemon);
+        
+        btn_add_in_deck.addEventListener("click", () => {
+            deck.push(pokemon);
+            console.log(deck);
+            msg_add_deck.innerHTML = `Adicionado ao deck`;
+        })
+        
+        see_deck.addEventListener("click", () =>{
+            deck_user.innerHTML = `${deck}`;
+        });
+    });
+
+
 });
 
