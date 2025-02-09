@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const nomePokemon = dataApi.name;
             const idPokemon = dataApi.id;
             const habilidades = dataApi.abilities.map(habilidade => habilidade.ability.name);
-            const image = dataApi.sprites.front_default;
+            const image =  dataApi['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
             const psPokemon = dataApi.stats.find(stat => stat.stat.name === 'hp');;
             
 
@@ -47,12 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if(psPokemon){
-                classPsPokemon.innerHTML = `${psPokemon.base_stat}`;
+                classPsPokemon.innerHTML = `Ps: ${psPokemon.base_stat}`;
             }
 
             if (classAbilityPokemon) {
                 // join() -> cria uma string com as habiliades dos pokemons separadas por virgula.
-                classAbilityPokemon.innerHTML = `${habilidades.join('<br> ')}`; 
+                classAbilityPokemon.innerHTML = `Habilidades: ${habilidades.join(', ')}`; 
             }
       
             if(classImagePokemon){
