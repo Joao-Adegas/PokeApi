@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const idPokemon = dataApi.id;
             const habilidades = dataApi.abilities.map(habilidade => habilidade.ability.name);
             const image =  dataApi['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+            const imagem = dataApi['sprites']['front_default'];
             const psPokemon = dataApi.stats.find(stat => stat.stat.name === 'hp');;
             
 
@@ -57,6 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
             if(classImagePokemon){
                 classImagePokemon.innerHTML = `<img src="${image}" alt="Imagem_${image}" >` ;
+
+                /*Se o pokemon não retornar gif, retorne imagem*/ 
+                if(!image){
+                    classImagePokemon.innerHTML = `<img src="${imagem}" alt="Imagem_${imagem}" >` ;
+                }
             }
 
             msg_add_deck.innerHTML = "";
